@@ -1,0 +1,168 @@
+# =====================================
+# Loon 定制高可用配置 - 作者：Gemini AI
+# 核心框架：iKeLee 高可用 + 规则优先级优化 + 全功能集成
+# 定制需求：App 精准分流 (PROCESS-NAME) + 英国/韩国策略组 + 全功能去广告
+# =====================================
+
+[General]
+ip-mode=v4-only
+ipv6-vif=off
+dns-server=system
+sni-sniffing=true
+disable-stun=true
+dns-reject-mode=LoopbackIP
+domain-reject-mode=DNS
+udp-fallback-mode=REJECT
+wifi-access-http-port=7222
+wifi-access-socks5-port=7221
+allow-wifi-access=false
+interface-mode=auto
+test-timeout=5
+disconnect-on-policy-change=false
+internet-test-url=http://connectivitycheck.platform.hicloud.com/generate_204
+proxy-test-url=http://www.gstatic.com/generate_204
+# resource-parser 保持默认或使用最新版本
+# resource-parser=https://raw.githubusercontent.com/sub-store-org/Sub-Store/release/sub-store-parser.loon.min.js
+geoip-url=https://geodata.kelee.one/Country-Masaiki.mmdb
+ipasn-url=https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
+skip-proxy=192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, e.crashlynatics.com
+bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32
+
+
+[Proxy]
+
+# =====================================
+# 🟢 节点订阅 [Remote Proxy] 🟢
+# 请在此处替换为您自己的订阅链接！
+# =====================================
+[Remote Proxy]
+# 订阅1 = 您的订阅链接, udp=true, fast-open=true, vmess-aead=true, enabled=true
+
+
+# =====================================
+# 🟢 节点筛选 [Remote Filter] 🟢
+# 确保节点名称包含以下关键词
+# =====================================
+[Remote Filter]
+# 韩国节点
+KR_Filter = NameRegex, FilterKey="^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+# 日本节点
+JP_Filter = NameRegex, FilterKey="^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+# 新加坡节点
+SG_Filter = NameRegex, FilterKey="^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+# 英国节点 (定制添加)
+UK_Filter = NameRegex, FilterKey = "(?i)(🇬🇧|英国|UK)" 
+# ... [其他不需要但保留的筛选器请自行添加] ... 
+
+
+# =====================================
+# 🟢 策略组 [Proxy Group] 🟢
+# 核心：url-test 自动优选 + fallback 自动兜底
+# =====================================
+[Proxy Group]
+# 最终高可用兜底策略：如果所有优选组都失效，则按顺序切换，保证不失联。
+兜底后备策略 = fallback, KR_Auto, JP_Auto, SG_Auto, UK_Auto, DIRECT, interval=60, max-timeout=2000, img-url=https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
+
+# 各地区自动优选策略组 (url-test)
+KR_Auto = url-test, KR_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+JP_Auto = url-test, JP_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+SG_Auto = url-test, SG_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+UK_Auto = url-test, UK_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
+
+# 特殊用途策略组 (AI 优选英国节点)
+AI_Auto = url-test, UK_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
+
+# 国内直连策略组 (用于远程规则的 policy)
+大陆网址 = select, DIRECT, KR_Auto, JP_Auto, SG_Auto, UK_Auto # 国内流量默认 DIRECT，但提供代理选项
+
+
+# =====================================
+# 🟢 规则 [Rule] 🟢
+# 优先级：App > 本地拦截 > 远程规则 > FINAL
+# =====================================
+[Rule]
+# === P1. 本地最高优先级 App 分流 (PROCESS-NAME) ===
+PROCESS-NAME,Spotify.app,KR_Auto           # 韩国优选
+PROCESS-NAME,YouTube.app,SG_Auto           # 新加坡优选
+PROCESS-NAME,Reddit.app,JP_Auto            # 日本优选
+PROCESS-NAME,Telegram.app,KR_Auto          # 韩国优选
+PROCESS-NAME,Instagram.app,JP_Auto         # 日本优选
+PROCESS-NAME,X.app,SG_Auto                 # 新加坡优选
+PROCESS-NAME,ChatGPT.app,AI_Auto           # 英国优选
+
+# === P2. 本地拦截规则 ===
+URL-REGEX,\.log\.,REJECT
+DOMAIN-SUFFIX,app-measurement.com,REJECT   # 阻止 Google Analytics 追踪
+
+# === P7. 最终兜底规则 ===
+FINAL, 兜底后备策略
+
+
+# =====================================
+# 🟢 远程规则 [Remote Rule] 🟢
+# 顺序：局域网 -> 广告 -> 国内分流 -> 海外 App
+# =====================================
+[Remote Rule]
+# P3. 局域网直连
+https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
+
+# P4. 远程广告拦截
+https://github.com/fmz200/wool_scripts/raw/main/Loon/rule/rejectAd.list, policy=REJECT, tag=广告拦截合集-规则@奶思, enabled=true
+
+# P5. 国内分流 (CN REGION/GeoIP)
+https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
+
+# P6. 常规海外 App 域名分流 (避免遗漏，指向高可用策略)
+https://rule.kelee.one/Loon/Global.lsr, policy=兜底后备策略, tag=Global, enabled=true
+
+# 针对特定App的域名分流，确保policy指向正确的优选组或兜底策略
+https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/TikTok/TikTok.list, policy=SG_Auto, tag=TikTok_Domain, enabled=true
+https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/Google/Google.list, policy=兜底后备策略, tag=Google_Domain, enabled=true
+
+
+[Host]
+# 改善App Store下载速度
+iosapps.itunes.apple.com = iosapps.itunes.apple.com.download.ks-cdn.com
+
+
+[Rewrite]
+
+[Script]
+
+[Remote Script]
+https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tasks.scripts, tag=定时任务合集@fmz200, enabled=true
+https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tools.scripts, tag=脚本工具合集@fmz200, enabled=true
+
+
+# =====================================
+# 🟢 插件 [Plugin] - 丰富的功能与解锁 🟢
+# =====================================
+[Plugin]
+# === 脚本管理工具（基础架构）===
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=兜底后备策略, enabled=true
+https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=兜底后备策略, enabled=true
+https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=兜底后备策略, enabled=true
+
+# === 去广告与解锁插件 ===
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/blockAds.plugin, policy=DIRECT, enabled=true
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/WeChatMiniAds.plugin, policy=DIRECT, enabled=true
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/weibo.plugin, policy=DIRECT, enabled=true
+https://raw.githubusercontent.com/001ProMax/Surge/main/Loon/Spotify.plugin, policy=KR_Auto, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/spotify.png, enabled=true
+https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/YouTube.plugin, policy=SG_Auto, enabled=true
+https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/Bilibili.plugin, policy=DIRECT, enabled=true
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/AppStore.plugin, policy=DIRECT, enabled=true
+
+# === 系统与辅助工具 ===
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/cookies.plugin, policy=DIRECT, enabled=false
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/Auto_Join_TF.plugin, policy=兜底后备策略, enabled=false
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Plugin/skip-proxy.lpx, policy=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/Imm.png, enabled=true
+https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/plugin/HTTPDNS.Block.plugin, policy=DIRECT, enabled=true
+
+
+[Remote Rewrite]
+
+[Mitm]
+hostname = -www.google.com
+ca-p12 = 
+ca-passphrase = 
+skip-server-cert-verify = false
