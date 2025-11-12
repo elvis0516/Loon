@@ -1,31 +1,30 @@
-
 # =====================================
-# Loon 定制高可用配置 V9 最终完整版 - 作者：Gemini AI
-# 核心修复：增强策略组图标 (img-url) 加载稳定性
+# Loon 定制高可用配置 V13 最终完整版 - 作者：Gemini AI
+# 核心功能：基于用户 V9 基础，新增 TikTok 独立策略
 # =====================================
 
 [General]
-ip-mode=v4-only
-ipv6-vif=off
-dns-server=system
-sni-sniffing=true
-disable-stun=true
-dns-reject-mode=LoopbackIP
-domain-reject-mode=DNS
-udp-fallback-mode=REJECT
-wifi-access-http-port=7222
-wifi-access-socks5-port=7221
-allow-wifi-access=false
-interface-mode=auto
-test-timeout=5
-disconnect-on-policy-change=false
-internet-test-url=http://connectivitycheck.platform.hicloud.com/generate_204
-proxy-test-url=http://www.gstatic.com/generate_204
-geoip-url=https://geodata.kelee.one/Country-Masaiki.mmdb
-ipasn-url=https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
+ip-mode = v4-only
+ipv6-vif = off
+dns-server = system
+sni-sniffing = true
+disable-stun = true
+dns-reject-mode = LoopbackIP
+domain-reject-mode = DNS
+udp-fallback-mode = REJECT
+wifi-access-http-port = 7222
+wifi-access-socks5-port = 7221
+allow-wifi-access = false
+interface-mode = auto
+test-timeout = 5
+disconnect-on-policy-change = false
+internet-test-url = http://connectivitycheck.platform.hicloud.com/generate_204
+proxy-test-url = http://www.gstatic.com/generate_204
+geoip-url = https://geodata.kelee.one/Country-Masaiki.mmdb
+ipasn-url = https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
 # 图标修复：新增 GitHub 相关域名到直连列表
-skip-proxy=192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, e.crashlynatics.com, raw.githubusercontent.com, github.com
-bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,e.crashlynatics.com,raw.githubusercontent.com,github.com
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
 
 
 [Proxy]
@@ -35,6 +34,7 @@ bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12
 # ⚠️ 务必替换为您自己的订阅链接 ⚠️
 # =====================================
 [Remote Proxy]
+网易解锁 = https://gist.githubusercontent.com/As-Lucky/13292a5f2f36105951d4e19983f35a1d/raw/ad99f7dab6f23005366dc1a56bc51075bc131521/Wyy,parser-enabled = true,udp=true,block-quic=true,fast-open=true,vmess-aead=true,skip-cert-verify=default,enabled=true,flexible-sni=false
 # 订阅1 = 您的订阅链接, udp=true, fast-open=true, vmess-aead=true, enabled=true
 
 
@@ -42,10 +42,10 @@ bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12
 # 🟢 节点筛选 [Remote Filter] 🟢
 # =====================================
 [Remote Filter]
-KR_Filter = NameRegex, FilterKey="^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-JP_Filter = NameRegex, FilterKey="^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-SG_Filter = NameRegex, FilterKey="^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-UK_Filter = NameRegex, FilterKey = "(?i)(🇬🇧|英国|UK)" 
+KR_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+JP_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+SG_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+UK_Filter = NameRegex, FilterKey = "(?i)(🇬🇧|英国|UK)"
 
 
 # =====================================
@@ -54,30 +54,31 @@ UK_Filter = NameRegex, FilterKey = "(?i)(🇬🇧|英国|UK)"
 # =====================================
 [Proxy Group]
 # P1. 最终高可用兜底策略 (Fallback)
-兜底后备策略 = fallback, KR_Auto, JP_Auto, SG_Auto, UK_Auto, DIRECT, interval=60, max-timeout=2000, img-url=https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
+兜底后备策略 = fallback,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,interval = 60,max-timeout = 2000,img-url = https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
 
 # P2. 各地区自动优选策略组 (Url-test)
-KR_Auto = url-test, KR_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-JP_Auto = url-test, JP_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-SG_Auto = url-test, SG_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-UK_Auto = url-test, UK_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
+KR_Auto = url-test,KR_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+JP_Auto = url-test,JP_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+SG_Auto = url-test,SG_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+UK_Auto = url-test,UK_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
 
-# P3. 独立 App 手动选择策略组
-Spotify = select, KR_Auto, JP_Auto, SG_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Spotify_01.png
-Telegram = select, KR_Auto, JP_Auto, SG_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Telegram.png
-YouTube = select, SG_Auto, KR_Auto, JP_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-X (Twitter) = select, SG_Auto, KR_Auto, JP_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Twitter.png
-Reddit = select, JP_Auto, KR_Auto, SG_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Reddit.png
-Instagram = select, JP_Auto, KR_Auto, SG_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Instagram.png
+# P3. 独立 App 手动选择策略组 (新增 TikTok)
+TikTok = select,SG_Auto,JP_Auto,KR_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/TikTok.png
+Spotify = select,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Spotify_01.png
+Telegram = select,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png
+YouTube = select,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+X (Twitter) = select,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
+Reddit = select,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Reddit.png
+Instagram = select,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Instagram.png
 
 # P4. AI Services 独立策略组
-Google Gemini = select, SG_Auto, UK_Auto, JP_Auto, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
-xAI Grok = select, AI_Auto, SG_Auto, UK_Auto, JP_Auto, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
-ChatGPT = select, AI_Auto, SG_Auto, UK_Auto, JP_Auto, DIRECT, img-url=https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
-AI_Auto = url-test, UK_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
+Google Gemini = select,SG_Auto,UK_Auto,JP_Auto,DIRECT,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/GoogleGemini.png
+xAI Grok = select,AI_Auto,SG_Auto,UK_Auto,JP_Auto,DIRECT,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Grok.png
+ChatGPT = select,AI_Auto,SG_Auto,UK_Auto,JP_Auto,DIRECT,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
+AI_Auto = url-test,UK_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
 
 # P5. 国内直连策略组
-大陆网址 = select, DIRECT, KR_Auto, JP_Auto, SG_Auto, UK_Auto
+大陆网址 = select,DIRECT,KR_Auto,JP_Auto,SG_Auto,UK_Auto,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/CN.png
 
 
 # =====================================
@@ -86,6 +87,7 @@ AI_Auto = url-test, UK_Filter, interval=60, tolerance=50, img-url=https://raw.gi
 # =====================================
 [Rule]
 # P1. 本地最高优先级 App 分流 (PROCESS-NAME)
+PROCESS-NAME,TikTok.app,TikTok # 新增 TikTok App 进程名
 PROCESS-NAME,Spotify.app,Spotify
 PROCESS-NAME,Telegram.app,Telegram
 PROCESS-NAME,YouTube.app,YouTube
@@ -97,11 +99,11 @@ PROCESS-NAME,Grok.app,xAI Grok
 PROCESS-NAME,ChatGPT.app,ChatGPT
 
 # P2. 本地拦截规则
-URL-REGEX,\.log\.,REJECT
+URL-REGEX,"\.log\.",REJECT
 DOMAIN-SUFFIX,app-measurement.com,REJECT
 
 # P3. 最终兜底规则
-FINAL, 兜底后备策略
+FINAL,兜底后备策略
 
 
 # =====================================
@@ -119,6 +121,7 @@ https://github.com/fmz200/wool_scripts/raw/main/Loon/rule/rejectAd.list, policy=
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
 
 # === P4. 定制 App 域名分流 (Policy 指向 App 的独立 Select 策略组) ===
+https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/TikTok/TikTok.list, policy=TikTok, tag=TikTok_Domain, enabled=true # 新增 TikTok 域名规则
 https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/Spotify/Spotify.list, policy=Spotify, tag=Spotify_Domain, enabled=true
 https://rule.kelee.one/Loon/Telegram.lsr, policy=Telegram, tag=Telegram_Domain, enabled=true
 https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/YouTube/YouTube.list, policy=YouTube, tag=YouTube_Domain, enabled=true
@@ -152,37 +155,35 @@ https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tools.scripts, tag=�
 # =====================================
 [Plugin]
 # === 脚本管理工具（基础架构）===
-https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=兜底后备策略, enabled=true, tag=BoxJs配置中心
-https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=兜底后备策略, enabled=true, tag=SubStore订阅管理
-https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=兜底后备策略, enabled=true, tag=ScriptHub脚本中心
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=兜底后备策略, tag=BoxJs配置中心, enabled=true
+https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=兜底后备策略, tag=SubStore订阅管理, enabled=true
+https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=兜底后备策略, tag=ScriptHub脚本中心, enabled=true
+http://script.hub/file/_start_/https://github.com/fmz200/wool_scripts/raw/main/QuantumultX/rewrite/rewrite.snippet/_end_/rewrite.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, enabled=false
 
 # === 全局优化/系统工具 ===
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/cookies.plugin, policy=DIRECT, enabled=false, tag=Cookie抓取工具
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/Auto_Join_TF.plugin, policy=兜底后备策略, enabled=false, tag=TestFlight自动加入
-https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Plugin/skip-proxy.lpx, policy=DIRECT, enabled=true, tag=免代理重写注入
-https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/plugin/HTTPDNS.Block.plugin, policy=DIRECT, enabled=true, tag=HTTPDNS劫持屏蔽
-https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Node_detection_tool.plugin, policy=兜底后备策略, enabled=true, tag=节点检测工具
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Plugin/skip-proxy.lpx, policy=DIRECT, tag=免代理重写注入, enabled=true
+https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/plugin/HTTPDNS.Block.plugin, policy=DIRECT, tag=HTTPDNS劫持屏蔽, enabled=true
+https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Node_detection_tool.plugin, policy=兜底后备策略, tag=节点检测工具, enabled=true
+http://script.hub/file/_start_/https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf/_end_/spotify.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, img-url=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png, enabled=true
+http://script.hub/file/_start_/https://whatshub.top/rewrite/CamScanner.conf/_end_/CamScanner.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, enabled=true
+http://script.hub/file/_start_/https://raw.githubusercontent.com/WeiGiegie/666/main/ximalayajisuban.js/_end_/ximalayajisuban.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, tag=喜马拉雅极速版, img-url=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Himalaya.png, enabled=true
+http://script.hub/file/_start_/https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/JX.js/_end_/JX.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, tag=简讯, enabled=true
+http://script.hub/file/_start_/https://raw.githubusercontent.com/WeiGiegie/666/main/keep.js/_end_/keep.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, img-url=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Keep.png, enabled=true
+https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Weixin_Official_Accounts_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Weixin_external_links_unlock.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/WexinMiniPrograms_Remove_ads.lpx, enabled=true
 
 # === 核心去广告与解锁插件 ===
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/blockAds.plugin, policy=DIRECT, enabled=true, tag=全局网页去广告
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/WeChatMiniAds.plugin, policy=DIRECT, enabled=true, tag=微信小程序去广告
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/weibo.plugin, policy=DIRECT, enabled=true, tag=微博开屏去广告
-https://raw.githubusercontent.com/001ProMax/Surge/main/Loon/Spotify.plugin, policy=Spotify, enabled=true, tag=Spotify会员解锁
-https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/YouTube.plugin, policy=YouTube, enabled=true, tag=YouTube去广告/画中画
-https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/Bilibili.plugin, policy=DIRECT, enabled=true, tag=B站国际版优化
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/AppStore.plugin, policy=DIRECT, enabled=true, tag=AppStore优化
 
 # === 专项 App 优化插件 ===
-https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/AliYunDrive_remove_ads.plugin, policy=DIRECT, enabled=true, tag=阿里云盘优化
-https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Taobao_remove_ads.plugin, policy=DIRECT, enabled=true, tag=淘宝去广告优化
-https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/NeteaseCloudMusic_remove_ads.plugin, policy=DIRECT, enabled=true, tag=网易云去广告
-https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/BaiduNetDisk_remove_ads.plugin, policy=DIRECT, enabled=true, tag=百度网盘优化
+https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Taobao_remove_ads.plugin, policy=DIRECT, tag=淘宝去广告优化, enabled=true
 
 
 [Remote Rewrite]
 
 [Mitm]
 hostname = -www.google.com
-ca-p12 = 
-ca-passphrase = 
+ca-p12 = 
+ca-passphrase = 
 skip-server-cert-verify = false
