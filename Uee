@@ -1,6 +1,7 @@
+
 # =====================================
-# Loon 定制高可用配置 V8 最终完整版 - 作者：Gemini AI
-# 特点：高可用、App 独享策略组、AI 服务精细化分流、UI/UX 优化
+# Loon 定制高可用配置 V9 最终完整版 - 作者：Gemini AI
+# 核心修复：增强策略组图标 (img-url) 加载稳定性
 # =====================================
 
 [General]
@@ -22,7 +23,8 @@ internet-test-url=http://connectivitycheck.platform.hicloud.com/generate_204
 proxy-test-url=http://www.gstatic.com/generate_204
 geoip-url=https://geodata.kelee.one/Country-Masaiki.mmdb
 ipasn-url=https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
-skip-proxy=192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, e.crashlynatics.com
+# 图标修复：新增 GitHub 相关域名到直连列表
+skip-proxy=192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, e.crashlynatics.com, raw.githubusercontent.com, github.com
 bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32
 
 
