@@ -139,25 +139,36 @@ https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tools.scripts, tag=�
 # =====================================
 [Plugin]
 # === 脚本管理工具（基础架构）===
-https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=兜底后备策略, enabled=true
-https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=兜底后备策略, enabled=true
-https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=兜底后备策略, enabled=true
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=兜底后备策略, enabled=true, tag=BoxJs配置中心
+https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=兜底后备策略, enabled=true, tag=SubStore订阅管理
+https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=兜底后备策略, enabled=true, tag=ScriptHub脚本中心
 
-# === 去广告与解锁插件 ===
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/blockAds.plugin, policy=DIRECT, enabled=true
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/WeChatMiniAds.plugin, policy=DIRECT, enabled=true
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/weibo.plugin, policy=DIRECT, enabled=true
-https://raw.githubusercontent.com/001ProMax/Surge/main/Loon/Spotify.plugin, policy=KR_Auto, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/spotify.png, enabled=true
-https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/YouTube.plugin, policy=SG_Auto, enabled=true
-https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/Bilibili.plugin, policy=DIRECT, enabled=true
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/AppStore.plugin, policy=DIRECT, enabled=true
+# === 全局优化/系统工具 ===
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/cookies.plugin, policy=DIRECT, enabled=false, tag=Cookie抓取工具
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/Auto_Join_TF.plugin, policy=兜底后备策略, enabled=false, tag=TestFlight自动加入
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Plugin/skip-proxy.lpx, policy=DIRECT, enabled=true, tag=免代理重写注入
+https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/plugin/HTTPDNS.Block.plugin, policy=DIRECT, enabled=true, tag=HTTPDNS劫持屏蔽
+https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Node_detection_tool.plugin, policy=兜底后备策略, enabled=true, tag=节点检测工具
 
-# === 系统与辅助工具 ===
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/cookies.plugin, policy=DIRECT, enabled=false
-https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/Auto_Join_TF.plugin, policy=兜底后备策略, enabled=false
-https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Plugin/skip-proxy.lpx, policy=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/Imm.png, enabled=true
-https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/plugin/HTTPDNS.Block.plugin, policy=DIRECT, enabled=true
+# === 核心去广告与解锁插件 ===
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/blockAds.plugin, policy=DIRECT, enabled=true, tag=全局网页去广告
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/WeChatMiniAds.plugin, policy=DIRECT, enabled=true, tag=微信小程序去广告
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/weibo.plugin, policy=DIRECT, enabled=true, tag=微博开屏去广告
+https://raw.githubusercontent.com/001ProMax/Surge/main/Loon/Spotify.plugin, policy=KR_Auto, enabled=true, tag=Spotify会员解锁
+https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/YouTube.plugin, policy=SG_Auto, enabled=true, tag=YouTube去广告/画中画
+https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/Bilibili.plugin, policy=DIRECT, enabled=true, tag=B站国际版优化
+https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/AppStore.plugin, policy=DIRECT, enabled=true, tag=AppStore优化
 
+# === 专项 App 优化插件（来自莫离/恩秀配置）===
+# 飞猪、滴滴等国内 App 优化，请确保它们使用 DIRECT 或 无代理
+https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/AliYunDrive_remove_ads.plugin, policy=DIRECT, enabled=true, tag=阿里云盘优化
+https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Taobao_remove_ads.plugin, policy=DIRECT, enabled=true, tag=淘宝去广告优化
+https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/NeteaseCloudMusic_remove_ads.plugin, policy=DIRECT, enabled=true, tag=网易云去广告
+https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/BaiduNetDisk_remove_ads.plugin, policy=DIRECT, enabled=true, tag=百度网盘优化
+
+# 以下插件功能过于相似或涉及特殊需求，已被排除或需用户自行决策是否保留：
+# 1. https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Spotify.plugin (与上面的 Spotify 解锁功能重叠)
+# 2. https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Remove_ads_by_keli.plugin (功能被通用 blockAds.plugin 覆盖)
 
 [Remote Rewrite]
 
