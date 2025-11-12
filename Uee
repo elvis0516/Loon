@@ -1,7 +1,6 @@
 # =====================================
-# Loon 定制高可用配置 - 作者：Gemini AI
-# 核心框架：iKeLee 高可用 + 规则优先级优化 + 全功能集成
-# 定制需求：App 精准分流 (PROCESS-NAME) + 英国/韩国策略组 + 全功能去广告
+# Loon 定制高可用配置 V4 终极版 - 作者：Gemini AI
+# 特点：高可用、自动优选、App 分流精准、且具备手动切换灵活性
 # =====================================
 
 [General]
@@ -21,8 +20,6 @@ test-timeout=5
 disconnect-on-policy-change=false
 internet-test-url=http://connectivitycheck.platform.hicloud.com/generate_204
 proxy-test-url=http://www.gstatic.com/generate_204
-# resource-parser 保持默认或使用最新版本
-# resource-parser=https://raw.githubusercontent.com/sub-store-org/Sub-Store/release/sub-store-parser.loon.min.js
 geoip-url=https://geodata.kelee.one/Country-Masaiki.mmdb
 ipasn-url=https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
 skip-proxy=192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, e.crashlynatics.com
@@ -41,87 +38,95 @@ bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12
 
 # =====================================
 # 🟢 节点筛选 [Remote Filter] 🟢
-# 确保节点名称包含以下关键词
 # =====================================
 [Remote Filter]
-# 韩国节点
 KR_Filter = NameRegex, FilterKey="^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-# 日本节点
 JP_Filter = NameRegex, FilterKey="^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-# 新加坡节点
 SG_Filter = NameRegex, FilterKey="^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-# 英国节点 (定制添加)
 UK_Filter = NameRegex, FilterKey = "(?i)(🇬🇧|英国|UK)" 
-# ... [其他不需要但保留的筛选器请自行添加] ... 
 
 
 # =====================================
 # 🟢 策略组 [Proxy Group] 🟢
-# 核心：url-test 自动优选 + fallback 自动兜底
+# 包含 Auto (url-test) 自动优选 和 Policy (select) 手动切换层
 # =====================================
 [Proxy Group]
-# 最终高可用兜底策略：如果所有优选组都失效，则按顺序切换，保证不失联。
+# P1. 最终高可用兜底策略 (Fallback)
 兜底后备策略 = fallback, KR_Auto, JP_Auto, SG_Auto, UK_Auto, DIRECT, interval=60, max-timeout=2000, img-url=https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
 
-# 各地区自动优选策略组 (url-test)
+# P2. 各地区自动优选策略组 (Url-test)
 KR_Auto = url-test, KR_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
 JP_Auto = url-test, JP_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
 SG_Auto = url-test, SG_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
 UK_Auto = url-test, UK_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
 
-# 特殊用途策略组 (AI 优选英国节点)
+# P3. App 手动选择策略组 (Select Policy Groups)
+# 默认KR_Auto，可手动切换到其他优选组或直连
+KR_Default_Policy = select, KR_Auto, JP_Auto, SG_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+# 默认SG_Auto，可手动切换
+SG_Default_Policy = select, SG_Auto, KR_Auto, JP_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+# 默认JP_Auto，可手动切换
+JP_Default_Policy = select, JP_Auto, KR_Auto, SG_Auto, UK_Auto, DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+# AI 策略：默认AI_Auto (UK优选)，可手动切换
+AI_Policy = select, AI_Auto, UK_Auto, KR_Auto, JP_Auto, SG_Auto, DIRECT, img-url=https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
+
+# P4. AI 自动优选策略组 (必须独立，才能被 Policy 组引用)
 AI_Auto = url-test, UK_Filter, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
 
-# 国内直连策略组 (用于远程规则的 policy)
-大陆网址 = select, DIRECT, KR_Auto, JP_Auto, SG_Auto, UK_Auto # 国内流量默认 DIRECT，但提供代理选项
+# P5. 国内直连策略组
+大陆网址 = select, DIRECT, KR_Auto, JP_Auto, SG_Auto, UK_Auto
 
 
 # =====================================
 # 🟢 规则 [Rule] 🟢
-# 优先级：App > 本地拦截 > 远程规则 > FINAL
+# PROCESS-NAME 优先锁定到 Select 组
 # =====================================
 [Rule]
-# === P1. 本地最高优先级 App 分流 (PROCESS-NAME) ===
-PROCESS-NAME,Spotify.app,KR_Auto           # 韩国优选
-PROCESS-NAME,YouTube.app,SG_Auto           # 新加坡优选
-PROCESS-NAME,Reddit.app,JP_Auto            # 日本优选
-PROCESS-NAME,Telegram.app,KR_Auto          # 韩国优选
-PROCESS-NAME,Instagram.app,JP_Auto         # 日本优选
-PROCESS-NAME,X.app,SG_Auto                 # 新加坡优选
-PROCESS-NAME,ChatGPT.app,AI_Auto           # 英国优选
+# P1. 本地最高优先级 App 分流 (PROCESS-NAME)
+PROCESS-NAME,Spotify.app,KR_Default_Policy
+PROCESS-NAME,YouTube.app,SG_Default_Policy
+PROCESS-NAME,Reddit.app,JP_Default_Policy
+PROCESS-NAME,Telegram.app,KR_Default_Policy
+PROCESS-NAME,Instagram.app,JP_Default_Policy
+PROCESS-NAME,X.app,SG_Default_Policy
+PROCESS-NAME,ChatGPT.app,AI_Policy
 
-# === P2. 本地拦截规则 ===
+# P2. 本地拦截规则
 URL-REGEX,\.log\.,REJECT
-DOMAIN-SUFFIX,app-measurement.com,REJECT   # 阻止 Google Analytics 追踪
+DOMAIN-SUFFIX,app-measurement.com,REJECT
 
-# === P7. 最终兜底规则 ===
+# P3. 最终兜底规则
 FINAL, 兜底后备策略
 
 
 # =====================================
 # 🟢 远程规则 [Remote Rule] 🟢
-# 顺序：局域网 -> 广告 -> 国内分流 -> 海外 App
+# 保证 App 域名分流和国内加速的正确顺序
 # =====================================
 [Remote Rule]
-# P3. 局域网直连
+# P1. 局域网直连
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
 
-# P4. 远程广告拦截
-https://github.com/fmz200/wool_scripts/raw/main/Loon/rule/rejectAd.list, policy=REJECT, tag=广告拦截合集-规则@奶思, enabled=true
+# P2. 远程广告拦截
+https://github.com/fmz200/wool_scripts/raw/main/Loon/rule/rejectAd.list, policy=REJECT, tag=广告拦截合集, enabled=true
 
-# P5. 国内分流 (CN REGION/GeoIP)
+# P3. 国内分流
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
 
-# P6. 常规海外 App 域名分流 (避免遗漏，指向高可用策略)
-https://rule.kelee.one/Loon/Global.lsr, policy=兜底后备策略, tag=Global, enabled=true
+# === P4. 定制 App 域名分流 (Policy 指向 Select 策略组) ===
+https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/Spotify/Spotify.list, policy=KR_Default_Policy, tag=Spotify_Domain, enabled=true
+https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/YouTube/YouTube.list, policy=SG_Default_Policy, tag=YouTube_Domain, enabled=true
+https://rule.kelee.one/Loon/Telegram.lsr, policy=KR_Default_Policy, tag=Telegram_Domain, enabled=true
+https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/Reddit/Reddit.list, policy=JP_Default_Policy, tag=Reddit_Domain, enabled=true
+https://github.com/fmz200/wool_scripts/raw/main/Loon/rule/Twitter.list, policy=SG_Default_Policy, tag=Twitter_Domain, enabled=true
+https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/Instagram/Instagram.list, policy=JP_Default_Policy, tag=Instagram_Domain, enabled=true
+https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=AI_Policy, tag=AI_Domain, enabled=true
 
-# 针对特定App的域名分流，确保policy指向正确的优选组或兜底策略
-https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/TikTok/TikTok.list, policy=SG_Auto, tag=TikTok_Domain, enabled=true
-https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Loon/Google/Google.list, policy=兜底后备策略, tag=Google_Domain, enabled=true
+# P5. 兜底海外 App 域名分流
+https://rule.kelee.one/Loon/Global.lsr, policy=兜底后备策略, tag=Global_CatchAll, enabled=true
 
 
 [Host]
-# 改善App Store下载速度
 iosapps.itunes.apple.com = iosapps.itunes.apple.com.download.ks-cdn.com
 
 
@@ -135,7 +140,7 @@ https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tools.scripts, tag=�
 
 
 # =====================================
-# 🟢 插件 [Plugin] - 丰富的功能与解锁 🟢
+# 🟢 插件 [Plugin] - 终极集成版 🟢
 # =====================================
 [Plugin]
 # === 脚本管理工具（基础架构）===
@@ -154,21 +159,17 @@ https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Node_detection_tool.plugi
 https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/blockAds.plugin, policy=DIRECT, enabled=true, tag=全局网页去广告
 https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/WeChatMiniAds.plugin, policy=DIRECT, enabled=true, tag=微信小程序去广告
 https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/weibo.plugin, policy=DIRECT, enabled=true, tag=微博开屏去广告
-https://raw.githubusercontent.com/001ProMax/Surge/main/Loon/Spotify.plugin, policy=KR_Auto, enabled=true, tag=Spotify会员解锁
-https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/YouTube.plugin, policy=SG_Auto, enabled=true, tag=YouTube去广告/画中画
+https://raw.githubusercontent.com/001ProMax/Surge/main/Loon/Spotify.plugin, policy=KR_Default_Policy, enabled=true, tag=Spotify会员解锁
+https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/YouTube.plugin, policy=SG_Default_Policy, enabled=true, tag=YouTube去广告/画中画
 https://gitlab.com/lodepuly/vpn_tool/raw/master/Loon/Bilibili.plugin, policy=DIRECT, enabled=true, tag=B站国际版优化
 https://raw.githubusercontent.com/fmz200/wool_scripts/raw/main/Loon/plugin/AppStore.plugin, policy=DIRECT, enabled=true, tag=AppStore优化
 
-# === 专项 App 优化插件（来自莫离/恩秀配置）===
-# 飞猪、滴滴等国内 App 优化，请确保它们使用 DIRECT 或 无代理
+# === 专项 App 优化插件 ===
 https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/AliYunDrive_remove_ads.plugin, policy=DIRECT, enabled=true, tag=阿里云盘优化
 https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Taobao_remove_ads.plugin, policy=DIRECT, enabled=true, tag=淘宝去广告优化
 https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/NeteaseCloudMusic_remove_ads.plugin, policy=DIRECT, enabled=true, tag=网易云去广告
 https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/BaiduNetDisk_remove_ads.plugin, policy=DIRECT, enabled=true, tag=百度网盘优化
 
-# 以下插件功能过于相似或涉及特殊需求，已被排除或需用户自行决策是否保留：
-# 1. https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Spotify.plugin (与上面的 Spotify 解锁功能重叠)
-# 2. https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Remove_ads_by_keli.plugin (功能被通用 blockAds.plugin 覆盖)
 
 [Remote Rewrite]
 
