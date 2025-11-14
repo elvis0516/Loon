@@ -103,10 +103,10 @@ ChatGPT = select,AI_Auto,US_Auto,DIRECT,img-url = https://raw.githubusercontent.
 TikTok = select,TW_Auto,HK_Auto,SG_Auto,JP_Auto,KR_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
 Spotify = select,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Spotify_01.png
 Telegram = select,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png
-YouTube = select,US_Auto,TW_Auto,HK_Auto,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-X (Twitter) = select,US_Auto,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
-Reddit = select,US_Auto,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Reddit.png
-Instagram = select,US_Auto,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Instagram.png
+YouTube = select,时延优选,US_Auto,TW_Auto,HK_Auto,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,故障转移,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+X (Twitter) = select,时延优选,US_Auto,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
+Reddit = select,负载均衡,US_Auto,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,时延优选,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Reddit.png
+Instagram = select,负载均衡,US_Auto,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,时延优选,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Instagram.png
 
 # P4. 国内直连策略组
 大陆网址 = select,DIRECT,HK_Auto,TW_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/CN.png
@@ -151,8 +151,8 @@ https://rule.kelee.one/Loon/Instagram.lsr, policy=Instagram, tag=Instagram_Domai
 https://rule.kelee.one/Loon/Gemini.lsr, policy=Google Gemini, tag=Google_Gemini_Domain, enabled=true
 https://kelee.one/Tool/Loon/Lsr/Grok.lsr, policy=xAI Grok, tag=xAI_Grok_Domain, enabled=true
 https://rule.kelee.one/Loon/OpenAI.lsr, policy=ChatGPT, tag=ChatGPT_Domain, enabled=true
-# P4. 兜底海外 App 域名分流
-https://rule.kelee.one/Loon/Global.lsr, policy=兜底后备策略, tag=Global_CatchAll, enabled=true
+# P4. 手动选择海外 App 域名分流
+https://rule.kelee.one/Loon/Global.lsr, policy=手动选择, tag=Global_CatchAll, enabled=true
 https://rule.kelee.one/Loon/ChinaMax.lsr, policy=DIRECT, tag=ChinaMax, enabled=true
 
 # P5. 局域网直连
@@ -180,14 +180,14 @@ https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tools.scripts, tag=�
 https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, enabled=true
 # === 脚本管理工具（基础架构）===
-https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=兜底后备策略, tag=BoxJs配置中心, enabled=true
-https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=兜底后备策略, tag=SubStore订阅管理, enabled=true
-https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=兜底后备策略, tag=ScriptHub脚本中心, enabled=true
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=手动选择, tag=BoxJs配置中心, enabled=true
+https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=手动选择, tag=SubStore订阅管理, enabled=true
+https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=手动选择, tag=ScriptHub脚本中心, enabled=true
 http://script.hub/file/_start_/https://github.com/fmz200/wool_scripts/raw/main/QuantumultX/rewrite/rewrite.snippet/_end_/rewrite.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, enabled=false
 # === 全局优化/系统工具 ===
 https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Plugin/skip-proxy.lpx, policy=DIRECT, tag=免代理重写注入, enabled=true
 https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/plugin/HTTPDNS.Block.plugin, policy=DIRECT, tag=HTTPDNS劫持屏蔽, enabled=true
-https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Node_detection_tool.plugin, policy=兜底后备策略, tag=节点检测工具, enabled=true
+https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Node_detection_tool.plugin, policy=手动选择, tag=节点检测工具, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Reddit_remove_ads.lpx, enabled=true
 http://script.hub/file/_start_/https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf/_end_/spotify.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, img-url=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png, enabled=true
 http://script.hub/file/_start_/https://whatshub.top/rewrite/CamScanner.conf/_end_/CamScanner.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, enabled=true
