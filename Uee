@@ -61,54 +61,43 @@ bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,1
 # ====================================================================================
 [Remote Filter]
 Local-ALL = NameRegex,Local, FilterKey = "^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|总计|到期|机场|下次|重置|重新|设置|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
-Sub-ALL = NameRegex, FilterKey = "^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|总计|到期|机场|下次|重置|重新|设置|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
 KR_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
 JP_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
 SG_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
 UK_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GB|GBR|United Kingdom|Britain)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)(\d+)?\b))).*$"
-TW_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇹🇼|🇨🇳|台湾|台北|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)(\d+)?\b))).*$"
-HK_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong|Hong Kong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)(\d+)?\b))).*$"
-US_Filter = NameRegex, FilterKey = "^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States|America)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)(\d+)?\b))).*$"
-Other_Filter = NameRegex, FilterKey = "^(?!.*((?i)🇭🇰|🇲🇴|🇹🇼|🇯🇵|🇰🇷|🇸🇬|🇺🇸|🇬🇧|香港|澳门|台湾|日本|川日|东京|大阪|泉日|埼玉|韩国|韓|首尔|新加坡|狮|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|英国|伦敦|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|总计|到期|机场|下次|重置|重新|设置|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|回国|校园|游戏|免登|🎮|(\b(HK|HKG|Hong|Hong Kong|MO|MAC|Oman|Macau|Macao|TW|TWN|Tai|Taiwan|JP|JPN|Japan|KR|KOR|Korea|SG|SGP|Singapore|US|USA|United States|America|UK|GB|GBR|United Kingdom|Britain|USE|USED|TOTAL|EXPIRE|EMAIL|GAME|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
 
 # ====================================================================================
 # 🟢 策略组 [Proxy Group] - 核心优化区域 🟢
 # ====================================================================================
 [Proxy Group]
-手动选择 = select,DIRECT,TW_Auto,HK_Auto,US_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,Other_Auto,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/Select.png
-时延优选 = url-test,TW_Auto,HK_Auto,US_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,Other_Auto,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/UrlTest.png
-故障转移 = fallback,TW_Auto,HK_Auto,US_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,Other_Auto,interval = 60,max-timeout = 2000,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/Fallback.png
-负载均衡 = load-balance,TW_Auto,HK_Auto,US_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,Other_Auto,interval = 60,max-timeout = 2000,algorithm = pcc,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/LoadBalance.png
-Local = url-test,Local-ALL,interval = 60,tolerance = 60,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/QuantumultX-03.png
-Global = select,Sub-ALL,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Flag-Icon/WorldMap.png
+手动选择 = select,DIRECT,KR_Auto,JP_Auto,SG_Auto,UK_Auto,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/Select.png
+时延优选 = url-test,KR_Auto,JP_Auto,SG_Auto,UK_Auto,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/UrlTest.png
+故障转移 = fallback,KR_Auto,JP_Auto,SG_Auto,UK_Auto,interval = 60,max-timeout = 2000,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/Fallback.png
+负载均衡 = load-balance,KR_Auto,JP_Auto,SG_Auto,UK_Auto,interval = 60,max-timeout = 2000,algorithm = pcc,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/LoadBalance.png
 
 # P1. 各地区自动优选策略组 (Url-test)
-TW_Auto = url-test,TW_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/Country_Icon/tw.png
-HK_Auto = url-test,HK_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/Country_Icon/hk.png
-US_Auto = url-test,US_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/Country_icon/us.png
 KR_Auto = url-test,KR_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
 JP_Auto = url-test,JP_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
 SG_Auto = url-test,SG_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
 UK_Auto = url-test,UK_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
-Other_Auto = url-test,Other_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/Country_Icon/Others.png # 非常用地区优选
 
 # P2. AI Services 独立策略组
-AI_Auto = url-test,US_Auto,UK_Auto,SG_Auto,JP_Auto,HK_Auto,TW_Auto,Other_Auto,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
-Google Gemini = select,AI_Auto,US_Auto,DIRECT,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/GoogleGemini.png
-xAI Grok = select,AI_Auto,US_Auto,DIRECT,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Grok.png
-ChatGPT = select,AI_Auto,US_Auto,DIRECT,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
+AI_Auto = url-test,KR_Auto,JP_Auto,SG_Auto,UK_Auto,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
+Google Gemini = select,AI_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/GoogleGemini.png
+xAI Grok = select,AI_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Grok.png
+ChatGPT = select,AI_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
 
 # P3. 独立 App 手动选择策略组
-TikTok = select,TW_Auto,HK_Auto,SG_Auto,JP_Auto,KR_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
+TikTok = select,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
 Spotify = select,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Spotify_01.png
 Telegram = select,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png
-YouTube = select,时延优选,US_Auto,TW_Auto,HK_Auto,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,故障转移,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-X (Twitter) = select,时延优选,US_Auto,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
-Reddit = select,负载均衡,US_Auto,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,时延优选,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Reddit.png
-Instagram = select,负载均衡,US_Auto,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,时延优选,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Instagram.png
+YouTube = select,时延优选,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,故障转移,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+X (Twitter) = select,时延优选,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
+Reddit = select,负载均衡,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,时延优选,img-url = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Reddit.png
+Instagram = select,负载均衡,JP_Auto,KR_Auto,SG_Auto,UK_Auto,DIRECT,时延优选,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Instagram.png
 
 # P4. 国内直连策略组
-大陆网址 = select,DIRECT,HK_Auto,TW_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/CN.png
+大陆网址 = select,KR_Auto,JP_Auto,SG_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/CN.png
 
 
 # ====================================================================================
@@ -169,7 +158,7 @@ https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGIO
 [Remote Script]
 https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tasks.scripts, tag=定时任务合集@fmz200, enabled=true
 https://raw.githubusercontent.com/Moli-X/Resources/main/Loon/Task.conf, tag=脚本合集, enabled=true
-https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tools.scripts, tag=脚本工具合集@fmz200, enabled=true
+
 
 
 # ====================================================================================
@@ -178,15 +167,16 @@ https://github.com/fmz200/wool_scripts/raw/main/Loon/script/tools.scripts, tag=�
 [Plugin]
 https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Remove_ads_by_keli.lpx, enabled=true
 # === 脚本管理工具（基础架构）===
 https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=手动选择, tag=BoxJs配置中心, enabled=true
 https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=手动选择, tag=SubStore订阅管理, enabled=true
 https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=手动选择, tag=ScriptHub脚本中心, enabled=true
 http://script.hub/file/_start_/https://github.com/fmz200/wool_scripts/raw/main/QuantumultX/rewrite/rewrite.snippet/_end_/rewrite.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, enabled=false
 # === 全局优化/系统工具 ===
-https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Plugin/skip-proxy.lpx, policy=DIRECT, tag=免代理重写注入, enabled=true
-https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/plugin/HTTPDNS.Block.plugin, policy=DIRECT, tag=HTTPDNS劫持屏蔽, enabled=true
-https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Node_detection_tool.plugin, policy=手动选择, tag=节点检测工具, enabled=true
+
+# === 核心去广告与解锁插件 ===
+
 https://kelee.one/Tool/Loon/Lpx/Reddit_remove_ads.lpx, enabled=true
 http://script.hub/file/_start_/https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf/_end_/spotify.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, img-url=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png, enabled=true
 http://script.hub/file/_start_/https://whatshub.top/rewrite/CamScanner.conf/_end_/CamScanner.plugin?type=qx-rewrite&target=loon-plugin&del=true&jqEnabled=true, enabled=true
@@ -198,49 +188,19 @@ https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Weixin_Official_Accounts_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Weixin_external_links_unlock.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/WexinMiniPrograms_Remove_ads.lpx, enabled=true
-# === 核心去广告与解锁插件 ===
-# === 专项 App 优化插件 ===
 https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/Taobao_remove_ads.plugin, policy=DIRECT, tag=淘宝去广告优化, enabled=false
-
-
-https://kelee.one/Tool/Loon/Lpx/Remove_ads_by_keli.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Netisp-x.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/NodeTools.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/StreamingMedia.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Redirect.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/WebPage.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/NodeSeek.lpx, policy=Hong Kong, enabled=false
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/CookieTask.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/AppRaven.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/RevenueCat.lpx, enabled=false
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/iTunes.lpx, enabled=false
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/SkipProxy.lpx, enabled=true
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Bank.lpx, enabled=true
-
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/ChinaUnicom.lpx, enabled=true
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/ColorfulCloudsWeatherPro.lpx, enabled=true
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/iRingo_WeatherKit.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/QQ.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/WeChat.lpx, policy=DIRECT, enabled=true
-
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Telegram.lpx, policy=Singapore, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Google.lpx, enabled=true
-
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Amap.lpx, enabled=true
-
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Railway12306.lpx, enabled=true
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Taobao.lpx, enabled=true
-
+# === 专项 App 优化插件 ===
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Jingdong.lpx, enabled=true
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Pinduoduo.lpx, enabled=true
-
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/Bilibili.lpx, enabled=true
 https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/YouTube.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/CMS_Adblock.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/MyBlockAds.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/StartUpAds.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/BlockAds.lpx, enabled=true
-https://raw.githubusercontent.com/sooyaaabo/Loon/main/Plugin/1.1.1.1.lpx, enabled=true
 
 [Remote Rewrite]
 
