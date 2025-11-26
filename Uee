@@ -28,7 +28,7 @@ wifi-access-socks5-port = 7221
 # 是否允许Wi-Fi下共享网络
 allow-wifi-access = false
 # 节点测速时的超时秒数
-test-timeout = 5
+test-timeout = 2
 interface-mode = auto
 # 策略切换时关闭连接
 disconnect-on-policy-change = false
@@ -44,10 +44,12 @@ geoip-url = https://geodata.kelee.one/Country-Masaiki.mmdb
 ipasn-url = https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
 # 绕过代理
 skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,e.crashlynatics.com
+# 绕过路由
 bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
 
 
 [Proxy]
+
 # ⚠️ 此处为 Loon 自动生成的本地节点列表，请保持原样，无需手动修改 ⚠️
 
 
@@ -56,6 +58,8 @@ bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,1
 # ⚠️ 请在此处添加您的订阅链接 ⚠️
 # ====================================================================================
 [Remote Proxy]
+
+
 
 # ====================================================================================
 # 🟢 节点筛选 [Remote Filter] 🟢 (用于区分本地和订阅节点)
@@ -76,21 +80,21 @@ Other_Filter = NameRegex, FilterKey = "^(?!.*((?i)🇭🇰|🇲🇴|🇹🇼|�
 # 🟢 策略组 [Proxy Group] - 核心区域  🟢
 # ====================================================================================
 [Proxy Group]
-手动选择 = select,DIRECT,时延优选,故障转移,负载均衡,TW_Auto,HK_Auto,US_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,Other_Auto,Local,Global,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/Select.png
-时延优选 = url-test,TW_Auto,HK_Auto,US_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,Other_Auto,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/UrlTest.png
-故障转移 = fallback,TW_Auto,HK_Auto,US_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,Other_Auto,interval = 60,max-timeout = 2000,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/Fallback.png
-负载均衡 = load-balance,TW_Auto,HK_Auto,US_Auto,KR_Auto,JP_Auto,SG_Auto,UK_Auto,Other_Auto,interval = 60,max-timeout = 2000,algorithm = pcc,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/LoadBalance.png
+手动选择 = select,DIRECT,时延优选,故障转移,负载均衡,JP_Auto,SG_Auto,KR_Auto,UK_Auto,TW_Auto,HK_Auto,US_Auto,Other_Auto,Local,Global,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/Select.png
+时延优选 = url-test,JP_Auto,SG_Auto,KR_Auto,UK_Auto,TW_Auto,HK_Auto,US_Auto,Other_Auto,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/UrlTest.png
+故障转移 = fallback,JP_Auto,SG_Auto,KR_Auto,UK_Auto,TW_Auto,HK_Auto,US_Auto,Other_Auto,interval = 60,max-timeout = 2000,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/Fallback.png
+负载均衡 = load-balance,JP_Auto,SG_Auto,KR_Auto,UK_Auto,TW_Auto,HK_Auto,US_Auto,Other_Auto,interval = 60,max-timeout = 2000,algorithm = pcc,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/LoadBalance.png
 Local = url-test,Local-ALL,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/China.png
 Global = select,Sub-ALL,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Flag-Icon/WorldMap.png
 
 # P1. 各地区自动优选策略组 (Url-test) 
+JP_Auto = url-test,JP_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+KR_Auto = url-test,KR_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+SG_Auto = url-test,SG_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+UK_Auto = url-test,UK_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
 TW_Auto = url-test,TW_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TW.png
 HK_Auto = url-test,HK_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HK.png
 US_Auto = url-test,US_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-KR_Auto = url-test,KR_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-JP_Auto = url-test,JP_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-SG_Auto = url-test,SG_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-UK_Auto = url-test,UK_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
 Other_Auto = url-test,Other_Filter,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/UN.png
 
 # P2. AI Services 独立策略组 (优先使用 US/UK 等)
@@ -100,7 +104,7 @@ xAI Grok = select,AI_Auto,US_Auto,UK_Auto,DIRECT,img-url = https://raw.githubuse
 ChatGPT = select,AI_Auto,US_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/ChatGPT.png
 
 # P3. 独立 App 手动选择策略组
-TikTok = select,TW_Auto,HK_Auto,SG_Auto,JP_Auto,KR_Auto,UK_Auto,时延优选,DIRECT,负载均衡,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
+TikTok = select,SG_Auto,JP_Auto,KR_Auto,UK_Auto,TW_Auto,HK_Auto,时延优选,DIRECT,负载均衡,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
 Spotify = select,UK_Auto,SG_Auto,JP_Auto,KR_Auto,时延优选,DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Spotify.png
 Telegram = select,故障转移,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram_X.png
 YouTube = select,时延优选,US_Auto,TW_Auto,HK_Auto,SG_Auto,KR_Auto,JP_Auto,UK_Auto,DIRECT,负载均衡,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
