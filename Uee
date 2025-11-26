@@ -28,7 +28,7 @@ wifi-access-socks5-port = 7221
 # 是否允许Wi-Fi下共享网络
 allow-wifi-access = false
 # 节点测速时的超时秒数
-test-timeout = 2
+test-timeout = 5
 interface-mode = auto
 # 策略切换时关闭连接
 disconnect-on-policy-change = false
